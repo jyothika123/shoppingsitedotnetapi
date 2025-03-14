@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
-using MyWebAPI.Models;
-using MyWebAPI.Data;
 using Microsoft.EntityFrameworkCore;
+using MyWebAPI.Data;
+using MyWebAPI.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MyWebAPI.Controllers
 {
@@ -20,19 +23,18 @@ namespace MyWebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
         {
-            return await _context.Orders.Include(o => o.User).ToListAsync();
+            return await _context.Orders.ToListAsync(); // Removed `.Include(o => o.User)` to prevent unnecessary joins
         }
 
         // GET: api/Order/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<Order>> GetOrder(int id)
         {
-            var order = await _context.Orders.Include(o => o.User)
-                                              .FirstOrDefaultAsync(o => o.Id == id);
+            var order = await _context.Orders.FindAsync(id);
 
             if (order == null)
             {
-                return NotFound();
+                return NotFound(new { message = "Order not found." });
             }
 
             return order;
@@ -40,8 +42,26 @@ namespace MyWebAPI.Controllers
 
         // POST: api/Order
         [HttpPost]
-        public async Task<ActionResult<Order>> PostOrder(Order order)
+        public async Task<ActionResult<Order>> PostOrder([FromBody] Order order)
         {
+            if (order == null)
+            {
+                return BadRequest(new { message = "Invalid order data." });
+            }
+
+            // Validate UserId
+            if (order.UserId <= 0)
+            {
+                return BadRequest(new { message = "UserId is required and must be greater than 0." });
+            }
+
+            // Check if User exists
+            var userExists = await _context.Users.AnyAsync(u => u.Id == order.UserId);
+            if (!userExists)
+            {
+                return BadRequest(new { message = "User not found." });
+            }
+
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
@@ -50,14 +70,31 @@ namespace MyWebAPI.Controllers
 
         // PUT: api/Order/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrder(int id, Order order)
+        public async Task<IActionResult> PutOrder(int id, [FromBody] Order order)
         {
-            if (id != order.Id)
+            if (order == null || id != order.Id)
             {
-                return BadRequest();
+                return BadRequest(new { message = "Order ID mismatch or invalid data." });
             }
 
-            _context.Entry(order).State = EntityState.Modified;
+            var existingOrder = await _context.Orders.FindAsync(id);
+            if (existingOrder == null)
+            {
+                return NotFound(new { message = "Order not found." });
+            }
+
+            // Validate UserId
+            if (order.UserId <= 0 || !await _context.Users.AnyAsync(u => u.Id == order.UserId))
+            {
+                return BadRequest(new { message = "User not found or invalid UserId." });
+            }
+
+            // Update order details
+            existingOrder.OrderDate = order.OrderDate;
+            existingOrder.TotalAmount = order.TotalAmount;
+            existingOrder.UserId = order.UserId;
+
+            _context.Entry(existingOrder).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -70,7 +107,7 @@ namespace MyWebAPI.Controllers
             var order = await _context.Orders.FindAsync(id);
             if (order == null)
             {
-                return NotFound();
+                return NotFound(new { message = "Order not found." });
             }
 
             _context.Orders.Remove(order);

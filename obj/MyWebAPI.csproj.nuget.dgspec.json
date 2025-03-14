@@ -1,26 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "/Users/test/Documents/sem2/webtech/assignment3/MyWebAPI/MyWebAPI.csproj": {}
+    "/Users/pallavi/Documents/Assignments/Semester 2/Web Technologies/assignment3/shoppingsitedotnetapi/MyWebAPI.csproj": {}
   },
   "projects": {
-    "/Users/test/Documents/sem2/webtech/assignment3/MyWebAPI/MyWebAPI.csproj": {
+    "/Users/pallavi/Documents/Assignments/Semester 2/Web Technologies/assignment3/shoppingsitedotnetapi/MyWebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/test/Documents/sem2/webtech/assignment3/MyWebAPI/MyWebAPI.csproj",
+        "projectUniqueName": "/Users/pallavi/Documents/Assignments/Semester 2/Web Technologies/assignment3/shoppingsitedotnetapi/MyWebAPI.csproj",
         "projectName": "MyWebAPI",
-        "projectPath": "/Users/test/Documents/sem2/webtech/assignment3/MyWebAPI/MyWebAPI.csproj",
-        "packagesPath": "/Users/test/.nuget/packages/",
-        "outputPath": "/Users/test/Documents/sem2/webtech/assignment3/MyWebAPI/obj/",
+        "projectPath": "/Users/pallavi/Documents/Assignments/Semester 2/Web Technologies/assignment3/shoppingsitedotnetapi/MyWebAPI.csproj",
+        "packagesPath": "/Users/pallavi/.nuget/packages/",
+        "outputPath": "/Users/pallavi/Documents/Assignments/Semester 2/Web Technologies/assignment3/shoppingsitedotnetapi/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/test/.nuget/NuGet/NuGet.Config"
+          "/Users/pallavi/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

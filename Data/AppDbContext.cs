@@ -39,9 +39,9 @@ namespace MyWebAPI.Data
                 .HasForeignKey(ci => ci.ProductId);
 
             modelBuilder.Entity<Order>()
-                .HasOne(o => o.User)
-                .WithMany(u => u.Orders)
-                .HasForeignKey(o => o.UserId);
+        .HasOne<User>() // Instead of referencing `o.User`
+        .WithMany(u => u.Orders)
+        .HasForeignKey(o => o.UserId);
         }
     }
 }

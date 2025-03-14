@@ -12,8 +12,8 @@ using MyWebAPI.Data;
 namespace MyWebAPI.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20250314064235_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250314220536_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -205,13 +205,11 @@ namespace MyWebAPI.Migrations
 
             modelBuilder.Entity("MyWebAPI.Models.Order", b =>
                 {
-                    b.HasOne("MyWebAPI.Models.User", "User")
+                    b.HasOne("MyWebAPI.Models.User", null)
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyWebAPI.Models.Product", b =>

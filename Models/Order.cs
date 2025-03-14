@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace MyWebAPI.Models
 {
@@ -13,9 +15,9 @@ namespace MyWebAPI.Models
 
         public decimal TotalAmount { get; set; }
 
-        // Foreign Key
-        [ForeignKey("User")]
+        [Required] // Ensure UserId is required
         public int UserId { get; set; }
-        public User User { get; set; } = null!;
     }
+
+
 }

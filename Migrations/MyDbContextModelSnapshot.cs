@@ -202,13 +202,11 @@ namespace MyWebAPI.Migrations
 
             modelBuilder.Entity("MyWebAPI.Models.Order", b =>
                 {
-                    b.HasOne("MyWebAPI.Models.User", "User")
+                    b.HasOne("MyWebAPI.Models.User", null)
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyWebAPI.Models.Product", b =>
