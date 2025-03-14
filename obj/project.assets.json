@@ -5191,19 +5191,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/pallavi/.nuget/packages/": {}
+    "/Users/maymolrobert/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/pallavi/Documents/Assignments/Semester 2/Web Technologies/assignment3/shoppingsitedotnetapi/MyWebAPI.csproj",
+      "projectUniqueName": "/Users/maymolrobert/Documents/Web/shoppingsitedotnetapi/MyWebAPI.csproj",
       "projectName": "MyWebAPI",
-      "projectPath": "/Users/pallavi/Documents/Assignments/Semester 2/Web Technologies/assignment3/shoppingsitedotnetapi/MyWebAPI.csproj",
-      "packagesPath": "/Users/pallavi/.nuget/packages/",
-      "outputPath": "/Users/pallavi/Documents/Assignments/Semester 2/Web Technologies/assignment3/shoppingsitedotnetapi/obj/",
+      "projectPath": "/Users/maymolrobert/Documents/Web/shoppingsitedotnetapi/MyWebAPI.csproj",
+      "packagesPath": "/Users/maymolrobert/.nuget/packages/",
+      "outputPath": "/Users/maymolrobert/Documents/Web/shoppingsitedotnetapi/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/pallavi/.nuget/NuGet/NuGet.Config"
+        "/Users/maymolrobert/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -5270,7 +5270,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.401/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

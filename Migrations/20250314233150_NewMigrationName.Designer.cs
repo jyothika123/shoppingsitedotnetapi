@@ -12,8 +12,8 @@ using MyWebAPI.Data;
 namespace MyWebAPI.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20250314223131_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20250314233150_NewMigrationName")]
+    partial class NewMigrationName
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
