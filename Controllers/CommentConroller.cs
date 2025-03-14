@@ -20,24 +20,18 @@ namespace MyWebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Comment>>> GetComments()
         {
-            return await _context.Comments.Include(c => c.User)
-                                          .Include(c => c.Product)
-                                          .ToListAsync();
+            return await _context.Comments.ToListAsync();
         }
 
         // GET: api/Comment/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<Comment>> GetComment(int id)
         {
-            var comment = await _context.Comments.Include(c => c.User)
-                                                 .Include(c => c.Product)
-                                                 .FirstOrDefaultAsync(c => c.Id == id);
-
+            var comment = await _context.Comments.FindAsync(id);
             if (comment == null)
             {
                 return NotFound();
             }
-
             return comment;
         }
 
@@ -57,10 +51,23 @@ namespace MyWebAPI.Controllers
         {
             if (id != comment.Id)
             {
-                return BadRequest();
+                return BadRequest("Comment ID mismatch.");
             }
 
-            _context.Entry(comment).State = EntityState.Modified;
+            var existingComment = await _context.Comments.FindAsync(id);
+            if (existingComment == null)
+            {
+                return NotFound("Comment not found.");
+            }
+
+            // Update only relevant fields
+            existingComment.Text = comment.Text;
+            existingComment.Rating = comment.Rating;
+            existingComment.ImageUrl = comment.ImageUrl;
+            existingComment.UserId = comment.UserId;
+            existingComment.ProductId = comment.ProductId;
+
+            _context.Entry(existingComment).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -73,7 +80,7 @@ namespace MyWebAPI.Controllers
             var comment = await _context.Comments.FindAsync(id);
             if (comment == null)
             {
-                return NotFound();
+                return NotFound("Comment not found.");
             }
 
             _context.Comments.Remove(comment);

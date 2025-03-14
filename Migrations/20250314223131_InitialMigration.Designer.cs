@@ -12,7 +12,7 @@ using MyWebAPI.Data;
 namespace MyWebAPI.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20250314220536_InitialMigration")]
+    [Migration("20250314223131_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -186,21 +186,17 @@ namespace MyWebAPI.Migrations
 
             modelBuilder.Entity("MyWebAPI.Models.Comment", b =>
                 {
-                    b.HasOne("MyWebAPI.Models.Product", "Product")
+                    b.HasOne("MyWebAPI.Models.Product", null)
                         .WithMany("Comments")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MyWebAPI.Models.User", "User")
+                    b.HasOne("MyWebAPI.Models.User", null)
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyWebAPI.Models.Order", b =>

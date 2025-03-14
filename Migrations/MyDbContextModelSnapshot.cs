@@ -183,21 +183,17 @@ namespace MyWebAPI.Migrations
 
             modelBuilder.Entity("MyWebAPI.Models.Comment", b =>
                 {
-                    b.HasOne("MyWebAPI.Models.Product", "Product")
+                    b.HasOne("MyWebAPI.Models.Product", null)
                         .WithMany("Comments")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MyWebAPI.Models.User", "User")
+                    b.HasOne("MyWebAPI.Models.User", null)
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyWebAPI.Models.Order", b =>

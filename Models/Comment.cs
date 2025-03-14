@@ -18,10 +18,8 @@ namespace MyWebAPI.Models
         // Foreign Keys
         [ForeignKey("User")]
         public int UserId { get; set; }
-        public User User { get; set; } = null!;
 
         [ForeignKey("Product")]
         public int ProductId { get; set; }
-        public Product Product { get; set; } = null!;
     }
 }

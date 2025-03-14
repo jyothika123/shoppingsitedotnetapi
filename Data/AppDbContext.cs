@@ -19,12 +19,12 @@ namespace MyWebAPI.Data
 
             // Configure relationships
             modelBuilder.Entity<Comment>()
-                .HasOne(c => c.User)
+                .HasOne<User>()
                 .WithMany(u => u.Comments)
                 .HasForeignKey(c => c.UserId);
 
             modelBuilder.Entity<Comment>()
-                .HasOne(c => c.Product)
+                .HasOne<Product>()
                 .WithMany(p => p.Comments)
                 .HasForeignKey(c => c.ProductId);
 
